@@ -60,3 +60,10 @@ Amazon Q Business can also connect to your own data sources to become an expert 
 
 ## Amazon Q Developer Basics
 
+Amazon Q Developer is a general-purpose tool that has been optimized for AWS services and is an AWS expert. You can use Amazon Q Developer through the Amazon Q extension in your IDE.
+
+This allows you to act for assistance with basic syntax, or with specific questions about the AWS API.
+
+You can also highlight code and then ask Q to explain the selected code. So asking Amazon Q Developer to explain the code can help you get an outside perspective without needing to go track down your coworker.
+
+You can also write comments in natural language that outline a specific task in English, such as "upload a file to Amazon S3 with server side encryption". Based on this, Amazon Q Developer recommends code snippets that can accomplish the task.
