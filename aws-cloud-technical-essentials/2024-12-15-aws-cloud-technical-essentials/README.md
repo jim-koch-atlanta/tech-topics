@@ -1,4 +1,4 @@
-# Coursera: AWS Cloud Technical Essential: AWS Networking (cont.)
+# Coursera: AWS Cloud Technical Essentials: AWS Networking (cont.)
 
 See https://www.coursera.org/learn/aws-cloud-technical-essentials/assignment-submission/rbU7N/ready-for-the-lab
 

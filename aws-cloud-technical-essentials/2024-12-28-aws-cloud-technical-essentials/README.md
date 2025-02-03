@@ -1,4 +1,4 @@
-# Coursera: AWS Cloud Technical Essential: Storage on AWS (cont.)
+# Coursera: AWS Cloud Technical Essentials: Storage on AWS (cont.)
 
 See https://www.coursera.org/learn/aws-cloud-technical-essentials/lecture/BK8vM/choose-the-right-storage-service
 

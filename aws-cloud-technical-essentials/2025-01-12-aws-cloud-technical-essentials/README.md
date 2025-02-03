@@ -1,4 +1,4 @@
-# Coursera: AWS Cloud Technical Essential: AWS Optimization
+# Coursera: AWS Cloud Technical Essentials: AWS Optimization
 
 See https://www.coursera.org/learn/aws-cloud-technical-essentials/lecture/fjBGf/amazon-ec2-auto-scaling.
 

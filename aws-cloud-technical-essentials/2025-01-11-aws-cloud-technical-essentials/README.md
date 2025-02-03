@@ -1,4 +1,4 @@
-# Coursera: AWS Cloud Technical Essential: Monitoring on AWS
+# Coursera: AWS Cloud Technical Essentials: Monitoring on AWS
 
 See https://www.coursera.org/learn/aws-cloud-technical-essentials/lecture/26rKT/introduction-to-week-4.
 

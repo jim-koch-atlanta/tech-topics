@@ -1,4 +1,4 @@
-# Coursera: AWS Cloud Technical Essential: AWS Compute
+# Coursera: AWS Cloud Technical Essentials: AWS Compute
 
 See https://www.coursera.org/learn/aws-cloud-technical-essentials/lecture/O3ccY/amazon-ec2-instance-lifecycle
 

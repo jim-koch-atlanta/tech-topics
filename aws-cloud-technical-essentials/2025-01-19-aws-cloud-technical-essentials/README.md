@@ -1,4 +1,4 @@
-# Coursera: AWS Cloud Technical Essential: Lab 4 and Assessment
+# Coursera: AWS Cloud Technical Essentials: Lab 4 and Assessment
 
 See https://www.coursera.org/learn/aws-cloud-technical-essentials/lecture/GGmpd/introduction-to-lab-4.
 

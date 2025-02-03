@@ -1,4 +1,4 @@
-# Coursera: AWS Cloud Technical Essential: AWS Networking
+# Coursera: AWS Cloud Technical Essentials: AWS Networking
 
 See https://www.coursera.org/learn/aws-cloud-technical-essentials/lecture/vZsj1/networking-on-aws
 

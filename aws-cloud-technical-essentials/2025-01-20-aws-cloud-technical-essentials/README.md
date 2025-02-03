@@ -1,4 +1,4 @@
-# Coursera: AWS Cloud Technical Essential: Going Serverless, Generative AI.
+# Coursera: AWS Cloud Technical Essentials: Going Serverless, Generative AI.
 
 See https://www.coursera.org/learn/aws-cloud-technical-essentials/lecture/39eaF/redesigning-the-employee-directory.
 

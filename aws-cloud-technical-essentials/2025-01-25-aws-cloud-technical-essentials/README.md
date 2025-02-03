@@ -1,4 +1,4 @@
-# Coursera: AWS Cloud Technical Essential: Generative AI Services on AWS.
+# Coursera: AWS Cloud Technical Essentials: Generative AI Services on AWS.
 
 See https://www.coursera.org/learn/aws-cloud-technical-essentials/lecture/oxssZ/introduction-to-amazon-bedrock.
 

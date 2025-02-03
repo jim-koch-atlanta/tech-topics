@@ -1,4 +1,4 @@
-# Coursera: AWS Cloud Technical Essential: Storage on AWS
+# Coursera: AWS Cloud Technical Essentials: Storage on AWS
 
 See https://www.coursera.org/learn/aws-cloud-technical-essentials/lecture/inyuH/introduction-to-week-3
 
