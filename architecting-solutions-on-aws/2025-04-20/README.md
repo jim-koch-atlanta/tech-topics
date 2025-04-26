@@ -46,3 +46,6 @@ Because we're using managed services, there are options to enable this.
 
 This is easy to achieve in the cloud.
 
+## Next
+
+https://www.coursera.org/learn/architecting-solutions-on-aws/lecture/EwHiY/an-overview-of-data-analytics-on-aws
