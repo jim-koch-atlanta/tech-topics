@@ -48,7 +48,7 @@ Then there's AWS Client VPN. This is for connecting administrators or clients to
 
 AWS VPNs are still at the will of the internet, so if bandwidth is not available, throughput will be lower. One other option is AWS Direct Connect, which is a **dedicated** private connection to AWS through a Direct Connect Delivery Partner or through AWS:
 
-![](image.png)
+![](image3.png)
 
 The data never hits the public internet. This reduces the chance of hitting bottlenecks or unexpected increases in latency.
 
@@ -64,7 +64,7 @@ Each AWS Direct Connect connection consists of a single dedicated connection bet
 
 An alternative is to have a backup IPsec VPN connection, so the VPC traffic can fail over to the VPN connection automatically. In this case, traffic to or from public resources, such as S3 buckets, will be routed over the internet. If a backup AWS Direct Connect link or IPsec VPN link is not used, then Amazon VPC traffic will be dropped if a failure occurs.
 
-![](image3.png)
+![](image4.png)
 
 ### AWS Managed VPN
 
@@ -72,13 +72,13 @@ An alternative is to have a backup IPsec VPN connection, so the VPC traffic can 
 
 To establish a connection between an on-premises network and an AWS VPC over public internet, an AWS Site-to-Site VPN connection is an option. This is an IPsec VPN connection.
 
-![](image4.png)
+![](image5.png)
 
 The **virtual private gateway** is the VPN concentrator on the Amazon side of the Site-to-Site VPN connection. A virtual private gateway is attached to the VPC where you want to create a Site-to-Site VPN connection.
 
 A virtual private gateway also supports and encourages multiple user gateway connections for redundancy and failover on the on-premises network side of the VPN connection:
 
-![](image5.png)
+![](image6.png)
 
 A **customer gateway** is the physical or software application that you own or manage in your on-premises network to work with the Site-to-Site VPN connection.
 
@@ -94,7 +94,7 @@ AWS Transit Gateway connects your VPCs and on-premises networks through a centra
 
 Consider the following solution, which shows how an on-premises network would connect to four AWS VPCs without using AWS Transit Gateway:
 
-![](image6.png)
+![](image7.png)
 
 This is complex and can be difficult to manage.
 
@@ -102,7 +102,7 @@ This is complex and can be difficult to manage.
 
 By using AWS Transit Gateway, you can make the network easier to manage. Transit Gateway is the hub for the connections between the different networks. You can apply route tables so that the transit gateway can connect networks to each other in a more centralized manner:
 
-![](image7.png)
+![](image8.png)
 
 Each transit gateway can manage multiple VPCs within one AWS region.
 
