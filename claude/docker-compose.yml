@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  gif-transformer:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: gif-transformer-dev
+    ports:
+      - "8080:80"
+    volumes:
+      # Mount application code (read-only for production-like behavior)
+      - ./src/public:/var/www/html:cached
+      - ./src/api:/var/www/html/api:cached
+      - ./src/views:/var/www/html/views:cached
+      # Persistent volumes for uploads and sessions
+      - uploads_data:/tmp/gif_uploads
+      - sessions_data:/tmp/php_sessions
+    environment:
+      - ENVIRONMENT=development
+      - PHP_DISPLAY_ERRORS=1
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 5s
+    networks:
+      - gif-app-network
+
+volumes:
+  uploads_data:
+  sessions_data:
+
+networks:
+  gif-app-network:
+    driver: bridge
