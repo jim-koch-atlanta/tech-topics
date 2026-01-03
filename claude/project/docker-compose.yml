@@ -9,10 +9,15 @@ services:
     ports:
       - "8080:80"
     volumes:
-      # Mount application code (read-only for production-like behavior)
-      - ./src/public:/var/www/html:cached
-      - ./src/api:/var/www/html/api:cached
-      - ./src/views:/var/www/html/views:cached
+      # Mount application code
+      # Add :cached to make it read-only for production-like behavior. This also
+      # provides better performance on macOS and Windows:
+      # - ./src/public:/var/www/html:cached
+      # - ./src/api:/var/www/html/api:cached
+      # - ./src/views:/var/www/html/views:cached
+      - ./src/public:/var/www/html
+      - ./src/api:/var/www/html/api
+      - ./src/views:/var/www/html/views
       # Persistent volumes for uploads and sessions
       - uploads_data:/tmp/gif_uploads
       - sessions_data:/tmp/php_sessions
