@@ -20,11 +20,11 @@ COPY apache-vhost.conf /etc/apache2/sites-available/000-default.conf
 COPY src/ .
 
 # Create directories and set permissions
-RUN mkdir -p uploads/{incoming,transformed} sessions /tmp/{php_sessions,gif_uploads/transformed} && \
+RUN mkdir -p uploads/incoming uploads/transformed sessions /tmp/php_sessions /tmp/gif_uploads/transformed && \
     chown -R www-data:www-data . && \
     chmod 755 . && \
     chmod 775 uploads sessions && \
-    chmod 777 /tmp/{php_sessions,gif_uploads/transformed}
+    chmod 777 /tmp/php_sessions /tmp/gif_uploads /tmp/gif_uploads/transformed
 
 EXPOSE 80
 
