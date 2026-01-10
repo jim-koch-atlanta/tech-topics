@@ -30,52 +30,8 @@ register_shutdown_function(function() {
     }
 });
 
-/**
- * Build ImageMagick convert command
- */
-function build_imagemagick_command($action, $input_path, $output_path, $params) {
-    $input_path = escapeshellarg($input_path);
-    $output_path = escapeshellarg($output_path);
-    
-    switch ($action) {
-        case 'resize':
-            $width = intval($params['width'] ?? 0);
-            $height = intval($params['height'] ?? 0);
-            if ($width <= 0 || $height <= 0) {
-                return null;
-            }
-            return "convert {$input_path} -resize {$width}x{$height} {$output_path}";
-        
-        case 'crop':
-            $width = intval($params['width'] ?? 0);
-            $height = intval($params['height'] ?? 0);
-            $x = intval($params['x'] ?? 0);
-            $y = intval($params['y'] ?? 0);
-            if ($width <= 0 || $height <= 0) {
-                return null;
-            }
-            return "convert {$input_path} -crop {$width}x{$height}+{$x}+{$y} {$output_path}";
-        
-        case 'rotate':
-            $angle = floatval($params['angle'] ?? 0);
-            if ($angle == 0) {
-                return null;
-            }
-            return "convert {$input_path} -rotate {$angle} {$output_path}";
-        
-        case 'flip':
-            $direction = strtolower($params['direction'] ?? 'vertical');
-            if ($direction === 'vertical') {
-                return "convert {$input_path} -flip {$output_path}";
-            } elseif ($direction === 'horizontal') {
-                return "convert {$input_path} -flop {$output_path}";
-            }
-            return null;
-        
-        default:
-            return null;
-    }
-}
+// Include the JimageMagick class
+require_once __DIR__ . '/jimagick.php';
 
 try {
 
@@ -113,30 +69,12 @@ if (!is_dir($transformed_dir)) {
 // Generate output path
 $output_path = $transformed_dir . '/' . uniqid('transform_', true) . '.gif';
 
-// Build ImageMagick command
-$command = build_imagemagick_command($action, $current_path, $output_path, $input);
+// Execute transformation using JimageMagick
+error_log("DEBUG TRANSFORM: action=$action, current_path=$current_path, output_path=$output_path");
 
-if (!$command) {
-    http_response_code(400);
-    echo json_encode(['error' => 'Invalid transformation action']);
-    exit;
-}
+JimageMagick::execute($action, $current_path, $output_path, $input);
 
-error_log("DEBUG TRANSFORM: action=$action, current_path=$current_path, output_path=$output_path, command=$command");
-
-// Execute transformation
-$output = null;
-$return_code = 0;
-exec($command, $output, $return_code);
-
-error_log("DEBUG: Command executed - return_code: $return_code, command: $command");
-error_log("DEBUG: Output: " . implode("\n", $output));
-
-if ($return_code !== 0) {
-    http_response_code(500);
-    echo json_encode(['error' => 'ImageMagick transformation failed', 'details' => implode("\n", $output), 'command' => $command]);
-    exit;
-}
+error_log("DEBUG: Transformation completed successfully");
 
 // Verify output file exists and has size
 if (!file_exists($output_path) || filesize($output_path) === 0) {
