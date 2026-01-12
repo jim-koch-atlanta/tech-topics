@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gif-transformer
+  labels:
+    app: gif-transformer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gif-transformer
+  template:
+    metadata:
+      labels:
+        app: gif-transformer
+    spec:
+      containers:
+        - name: gif-transformer
+          image: gif-transformer:latest
+          ports:
+            - containerPort: 80
+          envFrom:
+            - configMapRef:
+                name: gif-transformer-config
+            - secretRef:
+                name: gif-transformer-secrets
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+          volumeMounts:
+            - name: tmp-storage
+              mountPath: /var/www/html/tmp
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 10
+            periodSeconds: 30
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 10
+      volumes:
+        - name: tmp-storage
+          emptyDir: {}

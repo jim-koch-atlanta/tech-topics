@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: gif-transformer-config
+data:
+  AWS_DEFAULT_REGION: "us-east-1"
+  S3_BUCKET: "gif-transformer"
+  S3_USE_PATH_STYLE: "true"
+  TMP_DIR: "/var/www/html/tmp"

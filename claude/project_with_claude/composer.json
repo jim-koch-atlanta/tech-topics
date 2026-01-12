@@ -1,0 +1,14 @@
+{
+    "name": "gif-transformer/app",
+    "description": "GIF Transformer Web Application",
+    "type": "project",
+    "require": {
+        "php": ">=8.2",
+        "aws/aws-sdk-php": "^3.300"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "lib/"
+        }
+    }
+}
