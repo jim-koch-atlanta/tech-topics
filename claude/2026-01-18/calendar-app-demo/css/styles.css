@@ -1,0 +1,10 @@
+/*
+ * Calendar App Styles
+ *
+ * This file has been migrated to TailwindCSS.
+ * All styles are now defined using Tailwind utility classes in index.html
+ * and dynamically in JavaScript files.
+ *
+ * The :nth-child selectors for day-cell borders are handled via
+ * inline <style type="text/tailwindcss"> in index.html.
+ */

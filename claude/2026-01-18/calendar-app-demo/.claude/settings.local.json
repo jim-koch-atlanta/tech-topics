@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dir /s \"C:\\\\dev\\\\tech-topics\\\\claude\\\\2026-01-18\\\\calendar-app-demo\")",
+      "mcp__context7__resolve-library-id",
+      "mcp__context7__query-docs"
+    ]
+  },
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "context7"
+  ]
+}

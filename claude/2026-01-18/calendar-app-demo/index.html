@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendar App</title>
+    <!-- TailwindCSS via CDN (for production, use CLI build) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {}
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        /* Custom styles that need @apply or are hard to do inline */
+        .day-cell:nth-child(7n) {
+            @apply border-r-0;
+        }
+        .day-cell:nth-last-child(-n+7) {
+            @apply border-b-0;
+        }
+    </style>
+</head>
+<body class="font-sans bg-gray-50 text-gray-800 leading-relaxed min-h-screen">
+    <div class="max-w-4xl mx-auto p-4 md:p-8">
+        <header class="flex justify-between items-center p-4 bg-white rounded-t-lg border border-gray-200 border-b-0">
+            <button class="nav-btn w-11 h-11 border border-gray-200 bg-white rounded-lg cursor-pointer text-xl text-gray-800 flex items-center justify-center hover:bg-gray-50 focus:outline-2 focus:outline-blue-500 focus:outline-offset-2" id="prev-month" aria-label="Previous month">&lt;</button>
+            <h1 id="current-month" class="text-xl md:text-2xl font-semibold">January 2026</h1>
+            <button class="nav-btn w-11 h-11 border border-gray-200 bg-white rounded-lg cursor-pointer text-xl text-gray-800 flex items-center justify-center hover:bg-gray-50 focus:outline-2 focus:outline-blue-500 focus:outline-offset-2" id="next-month" aria-label="Next month">&gt;</button>
+        </header>
+
+        <div class="bg-white border border-gray-200 rounded-b-lg">
+            <div class="day-headers grid grid-cols-7 border-b border-gray-200">
+                <span class="py-3 px-2 text-center font-semibold text-xs md:text-sm uppercase text-gray-500">Sun</span>
+                <span class="py-3 px-2 text-center font-semibold text-xs md:text-sm uppercase text-gray-500">Mon</span>
+                <span class="py-3 px-2 text-center font-semibold text-xs md:text-sm uppercase text-gray-500">Tue</span>
+                <span class="py-3 px-2 text-center font-semibold text-xs md:text-sm uppercase text-gray-500">Wed</span>
+                <span class="py-3 px-2 text-center font-semibold text-xs md:text-sm uppercase text-gray-500">Thu</span>
+                <span class="py-3 px-2 text-center font-semibold text-xs md:text-sm uppercase text-gray-500">Fri</span>
+                <span class="py-3 px-2 text-center font-semibold text-xs md:text-sm uppercase text-gray-500">Sat</span>
+            </div>
+            <div class="days-grid grid grid-cols-7" id="days-grid">
+                <!-- Days will be rendered here by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Event Modal -->
+    <div class="modal-overlay fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50 hidden" id="modal-overlay">
+        <div class="modal bg-white rounded-xl p-6 w-full max-w-md max-h-[90vh] overflow-y-auto" role="dialog" aria-labelledby="modal-title">
+            <h2 id="modal-title" class="mb-4 text-xl font-semibold">Add Event</h2>
+            <form id="event-form">
+                <div class="form-group mb-4">
+                    <label for="event-title" class="block mb-1.5 font-medium text-sm">Title *</label>
+                    <input type="text" id="event-title" name="title" maxlength="100" required
+                        class="w-full px-3 py-2.5 border border-gray-200 rounded-md text-base focus:outline-2 focus:outline-blue-500 focus:-outline-offset-1 focus:border-blue-500">
+                    <span class="error-message block text-red-500 text-xs mt-1 min-h-4" id="title-error"></span>
+                </div>
+                <div class="form-group mb-4">
+                    <label for="event-date" class="block mb-1.5 font-medium text-sm">Date *</label>
+                    <input type="date" id="event-date" name="date" required
+                        class="w-full px-3 py-2.5 border border-gray-200 rounded-md text-base focus:outline-2 focus:outline-blue-500 focus:-outline-offset-1 focus:border-blue-500">
+                    <span class="error-message block text-red-500 text-xs mt-1 min-h-4" id="date-error"></span>
+                </div>
+                <div class="form-group mb-4">
+                    <label for="event-time" class="block mb-1.5 font-medium text-sm">Time</label>
+                    <input type="time" id="event-time" name="time"
+                        class="w-full px-3 py-2.5 border border-gray-200 rounded-md text-base focus:outline-2 focus:outline-blue-500 focus:-outline-offset-1 focus:border-blue-500">
+                    <span class="error-message block text-red-500 text-xs mt-1 min-h-4" id="time-error"></span>
+                </div>
+                <div class="form-group mb-4">
+                    <label for="event-description" class="block mb-1.5 font-medium text-sm">Description</label>
+                    <textarea id="event-description" name="description" maxlength="500" rows="3"
+                        class="w-full px-3 py-2.5 border border-gray-200 rounded-md text-base font-sans focus:outline-2 focus:outline-blue-500 focus:-outline-offset-1 focus:border-blue-500"></textarea>
+                    <span class="error-message block text-red-500 text-xs mt-1 min-h-4" id="description-error"></span>
+                </div>
+                <input type="hidden" id="event-id" name="id">
+                <div class="flex justify-between items-center mt-6 gap-2">
+                    <button type="button" class="btn btn-delete px-4 py-2.5 rounded-md text-sm font-medium cursor-pointer min-h-11 bg-red-500 text-white hover:bg-red-600 focus:outline-2 focus:outline-blue-500 focus:outline-offset-2 hidden" id="delete-btn">Delete</button>
+                    <div class="flex gap-2 ml-auto">
+                        <button type="button" class="btn btn-cancel px-4 py-2.5 rounded-md text-sm font-medium cursor-pointer min-h-11 bg-gray-50 text-gray-800 border border-gray-200 hover:bg-gray-200 focus:outline-2 focus:outline-blue-500 focus:outline-offset-2" id="cancel-btn">Cancel</button>
+                        <button type="submit" class="btn btn-save px-4 py-2.5 rounded-md text-sm font-medium cursor-pointer min-h-11 bg-blue-500 text-white hover:bg-blue-600 focus:outline-2 focus:outline-blue-500 focus:outline-offset-2">Save</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/storage.js"></script>
+    <script src="js/validation.js"></script>
+    <script src="js/calendar.js"></script>
+    <script src="js/events.js"></script>
+    <script src="js/modal.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
