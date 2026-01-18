@@ -1,0 +1,1 @@
+Analyze this folder's files for spelling, syntax, and content. Suggest ways to improve comprehension and readability.
